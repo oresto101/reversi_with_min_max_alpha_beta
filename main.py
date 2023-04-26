@@ -140,12 +140,15 @@ def minimax(board, player, strategy, depth, alpha, beta, maximizing):
                 break
         return best_value, best_move
 
+all_analyzed_nodes = 0
 total_nodes = 0
 
 def find_best_move(board, player, strategy, depth):
     global total_nodes
+    global all_analyzed_nodes
     total_nodes = 0
     _, best_move = minimax(board, player, strategy, depth, sys.maxsize, -sys.maxsize, player)
+    all_analyzed_nodes += total_nodes
     return best_move
 
 
@@ -178,6 +181,7 @@ def play_game(player_color, strategy):
     print(f"White pieces: {white_amount}, Black pieces: {black_amount}")
     print("Final board")
     print_board(board)
+    print(f"Total evaluated nodes: {all_analyzed_nodes}")
 
 
 if __name__ == '__main__':
